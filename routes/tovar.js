@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Example = require("../models/Example");
+const Tovar = require("../models/Tovar");
 
 const errorHandler = (err, req, res) => {
   console.error(err);
@@ -9,9 +9,9 @@ const errorHandler = (err, req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { email } = req.body;
-    const newExample = new Example({ email });
-    await newExample.save();
-    res.status(201).json(newExample);
+    const newExample_tovar = new Tovar({ email });
+    await newExample_tovar.save();
+    res.status(201).json(newExample_tovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -19,8 +19,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const examples = await Example.find();
-    res.json(examples);
+    const examples_tovar = await Tovar.find();
+    res.json(examples_tovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -28,11 +28,11 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const example = await Example.findById(req.params.id);
-    if (!example) {
-      return res.status(404).json({ error: "Example not found" });
+    const tovar = await Tovar.findById(req.params.id);
+    if (!tovar) {
+      return res.status(404).json({ error: "Tovar not found" });
     }
-    res.json(example);
+    res.json(tovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -41,15 +41,15 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { email } = req.body;
-    const updatedExample = await Example.findByIdAndUpdate(
+    const updatedCoffee = await Tovar.findByIdAndUpdate(
       req.params.id,
       { email },
       { new: true }
     );
-    if (!updatedExample) {
-      return res.status(404).json({ error: "Example not found" });
+    if (!updatedCoffee) {
+      return res.status(404).json({ error: "Tovar not found" });
     }
-    res.json(updatedExample);
+    res.json(updatedCoffee);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -57,11 +57,11 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const deletedExample = await Example.findByIdAndDelete(req.params.id);
-    if (!deletedExample) {
-      return res.status(404).json({ error: "Example not found" });
+    const deletedCoffee = await Tovar.findByIdAndDelete(req.params.id);
+    if (!deletedCoffee) {
+      return res.status(404).json({ error: "Tovar not found" });
     }
-    res.json({ message: "Example deleted successfully" });
+    res.json({ message: "Tovar deleted successfully" });
   } catch (err) {
     errorHandler(err, req, res);
   }
