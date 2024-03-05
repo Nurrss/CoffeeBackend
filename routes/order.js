@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Example = require("../models/Order");
+const Order = require("../models/Order");
 
 const errorHandler = (err, req, res) => {
   console.error(err);
@@ -26,9 +26,10 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 router.get("/:id", async (req, res) => {
   try {
-    const example = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id);
     if (!order) {
       return res.status(404).json({ error: "Order not found" });
     }
