@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const BalansSchema = new Schema({
   aksha: {
-    type: Number,
+    type: String,
   },
 });
 

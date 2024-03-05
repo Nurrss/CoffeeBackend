@@ -6,17 +6,6 @@ const errorHandler = (err, req, res) => {
   res.status(500).json({ error: "Internal Server Error" });
 };
 
-router.post("/", async (req, res) => {
-  try {
-    const { aksha } = req.body;
-    const newBalans = new Balans({ aksha });
-    await newBalans.save();
-    res.status(200).json(newBalans);
-  } catch (err) {
-    errorHandler(err, req, res);
-  }
-});
-
 router.put("/:id", async (req, res) => {
   try {
     const { aksha } = req.body;
@@ -28,7 +17,7 @@ router.put("/:id", async (req, res) => {
     if (!updatedBalans) {
       return res.status(404).json({ error: "Balanse not found" });
     }
-    res.status(200).json(updatedBalans);
+    res.status(200).json({ data: updatedBalans });
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -37,7 +26,7 @@ router.put("/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const balans = await Balans.find();
-    res.json(balans);
+    res.json({ data: balans });
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -49,7 +38,7 @@ router.get("/:id", async (req, res) => {
     if (!balans) {
       return res.status(404).json({ error: "Example not found" });
     }
-    res.status(200).json(example);
+    res.status(200).json({ data: balans });
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -59,9 +48,9 @@ router.delete("/:id", async (req, res) => {
   try {
     const deletedBalans = await Balans.findByIdAndDelete(req.params.id);
     if (!deletedBalans) {
-      return res.status(404).json({ error: "Example not found" });
+      return res.status(404).json({ error: "Balans not found" });
     }
-    res.status(200).json({ message: "Example deleted successfully" });
+    res.status(200).json({ message: "Balans deleted successfully" });
   } catch (err) {
     errorHandler(err, req, res);
   }
