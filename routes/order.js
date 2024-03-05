@@ -30,7 +30,7 @@ router.get("/:id", async (req, res) => {
   try {
     const example = await Order.findById(req.params.id);
     if (!order) {
-      return res.status(404).json({ error: "Example not found" });
+      return res.status(404).json({ error: "Order not found" });
     }
     res.json(order);
   } catch (err) {
@@ -47,7 +47,7 @@ router.put("/:id", async (req, res) => {
       { new: true }
     );
     if (!updatedOrder) {
-      return res.status(404).json({ error: "Example not found" });
+      return res.status(404).json({ error: "Order not found" });
     }
     res.json(updatedOrder);
   } catch (err) {
@@ -59,9 +59,9 @@ router.delete("/:id", async (req, res) => {
   try {
     const deletedOrder = await Order.findByIdAndDelete(req.params.id);
     if (!deletedOrder) {
-      return res.status(404).json({ error: "Example not found" });
+      return res.status(404).json({ error: "Order not found" });
     }
-    res.json({ message: "Example deleted successfully" });
+    res.json({ message: "Order deleted successfully" });
   } catch (err) {
     errorHandler(err, req, res);
   }
