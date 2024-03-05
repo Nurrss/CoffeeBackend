@@ -1,18 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
-  tovar: {
-    type: Schema.Types.ObjectId,
-    ref: "Result",
-  },
-  title: {
+const orderSchema = new Schema({
+  coffee: [],
+  summa: {
     type: String,
-    required: true,
-  },
-  author: {
-    type: String,
-    required: true,
   },
 });
 
