@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+const balansRoute = require("./routes/balans");
 
 const port = 8000;
 
@@ -30,6 +31,8 @@ mongoose.connection.on("error", (err) => {
     "mongoErrLog.log"
   );
 });
+
+app.use("/balans", balansRoute);
 
 // it should be in the end
 app.use(function (req, res) {
