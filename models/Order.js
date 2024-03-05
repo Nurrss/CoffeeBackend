@@ -8,5 +8,5 @@ const orderSchema = new Schema({
   },
 });
 
-const Post = mongoose.model("Post", postSchema);
-module.exports = Post;
+const Order = mongoose.model("Order", orderSchema);
+module.exports = Order;
