@@ -6,16 +6,16 @@ const errorHandler = (err, req, res) => {
   res.status(500).json({ error: "Internal Server Error" });
 };
 
-router.post("/", async (req, res) => {
-  try {
-    const { email } = req.body;
-    const newOrder = new Order({ email });
-    await newOrder.save();
-    res.status(201).json(newOrder);
-  } catch (err) {
-    errorHandler(err, req, res);
-  }
-});
+// router.post("/", async (req, res) => {
+//   try {
+//     const { email } = req.body;
+//     const newOrder = new Order({ email });
+//     await newOrder.save();
+//     res.status(201).json(newOrder);
+//   } catch (err) {
+//     errorHandler(err, req, res);
+//   }
+// });
 
 router.get("/", async (req, res) => {
   try {
@@ -25,7 +25,6 @@ router.get("/", async (req, res) => {
     errorHandler(err, req, res);
   }
 });
-
 
 router.get("/:id", async (req, res) => {
   try {
@@ -39,22 +38,22 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
-  try {
-    const { email } = req.body;
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
-      { email },
-      { new: true }
-    );
-    if (!updatedOrder) {
-      return res.status(404).json({ error: "Order not found" });
-    }
-    res.json(updatedOrder);
-  } catch (err) {
-    errorHandler(err, req, res);
-  }
-});
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const { summa } = req.body;
+//     const updatedOrder = await Order.findByIdAndUpdate(
+//       req.params.id,
+//       { summa },
+//       { new: true }
+//     );
+//     if (!updatedOrder) {
+//       return res.status(404).json({ error: "Order not found" });
+//     }
+//     res.json(updatedOrder);
+//   } catch (err) {
+//     errorHandler(err, req, res);
+//   }
+// });
 
 router.delete("/:id", async (req, res) => {
   try {

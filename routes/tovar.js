@@ -8,10 +8,10 @@ const errorHandler = (err, req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { email } = req.body;
-    const newExample_tovar = new Tovar({ email });
-    await newExample_tovar.save();
-    res.status(201).json(newExample_tovar);
+    const { name, price } = req.body;
+    const tovar = new Tovar({ name, price });
+    await tovar.save();
+    res.status(201).json(tovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -19,8 +19,8 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const examples_tovar = await Tovar.find();
-    res.json(examples_tovar);
+    const tovar = await Tovar.find();
+    res.json(tovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -40,16 +40,16 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const { email } = req.body;
-    const updatedCoffee = await Tovar.findByIdAndUpdate(
+    const { name, price } = req.body;
+    const updatedTovar = await Tovar.findByIdAndUpdate(
       req.params.id,
-      { email },
+      { name, price },
       { new: true }
     );
-    if (!updatedCoffee) {
+    if (!updatedTovar) {
       return res.status(404).json({ error: "Tovar not found" });
     }
-    res.json(updatedCoffee);
+    res.json(updatedTovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
@@ -57,8 +57,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const deletedCoffee = await Tovar.findByIdAndDelete(req.params.id);
-    if (!deletedCoffee) {
+    const deletedTovar = await Tovar.findByIdAndDelete(req.params.id);
+    if (!deletedTovar) {
       return res.status(404).json({ error: "Tovar not found" });
     }
     res.json({ message: "Tovar deleted successfully" });
