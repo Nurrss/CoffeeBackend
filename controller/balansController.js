@@ -1,4 +1,4 @@
-const Balans = require("../models/Balans");
+const Balans = require("../models/Balance");
 
 
 const getBalans = (req, res) => {
