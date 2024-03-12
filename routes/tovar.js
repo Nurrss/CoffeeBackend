@@ -6,7 +6,8 @@ const errorHandler = (err, req, res) => {
   res.status(500).json({ error: "Internal Server Error" });
 };
 
-router.post("/", async (req, res) => {
+//done
+router.post("/add", async (req, res) => {
   try {
     const { name, price } = req.body;
     const tovar = new Tovar({ name, price });
@@ -17,6 +18,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//done
 router.get("/", async (req, res) => {
   try {
     const tovar = await Tovar.find();
@@ -26,6 +28,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//done
 router.get("/:id", async (req, res) => {
   try {
     const tovar = await Tovar.findById(req.params.id);
@@ -38,7 +41,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/update/:id", async (req, res) => {
   try {
     const { name, price } = req.body;
     const updatedTovar = await Tovar.findByIdAndUpdate(
@@ -55,7 +58,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const deletedTovar = await Tovar.findByIdAndDelete(req.params.id);
     if (!deletedTovar) {
