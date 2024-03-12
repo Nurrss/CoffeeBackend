@@ -1,13 +1,25 @@
 const router = require("express").Router();
+<<<<<<< HEAD:routes/balans.js
+const Balans = require("../models/Balans");
+const { getBalans, updateBalans, deleteBalans } = require("../controller/balansController");
+=======
 const Balance = require("../models/Balance");
 const { getBalance } = require("../controller/balanceController");
+>>>>>>> master:routes/balance.js
 
 const errorHandler = (err, req, res) => {
   console.error(err);
   res.status(500).json({ error: "Internal Server Error" });
 };
 
+<<<<<<< HEAD:routes/balance.js
+router.get("/", getBalans);
+router.put("/", updateBalans);
+router.delete("/", deleteBalans);
+
+=======
 router.get("/", getBalance);
+>>>>>>> master:routes/balance.js
 
 router.put("/:id", async (req, res) => {
   try {
@@ -25,6 +37,7 @@ router.put("/:id", async (req, res) => {
     errorHandler(err, req, res);
   }
 });
+
 
 router.get("/:id", async (req, res) => {
   try {
