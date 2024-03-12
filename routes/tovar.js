@@ -9,9 +9,9 @@ const errorHandler = (err, req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { email } = req.body;
-    const newExample = new Tovar({ email });
-    await newExample.save();
-    res.status(201).json(newExample);
+    const newExample_tovar = new Tovar({ email });
+    await newExample_tovar.save();
+    res.status(201).json(newExample_tovar);
   } catch (err) {
     errorHandler(err, req, res);
   }
