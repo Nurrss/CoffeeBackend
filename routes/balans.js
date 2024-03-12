@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const Balans = require("../models/Balans");
-const { getBalans } = require("../controller/balansController");
+const { getBalans, updateBalans, deleteBalans } = require("../controller/balansController");
 
 const errorHandler = (err, req, res) => {
   console.error(err);
@@ -8,6 +8,9 @@ const errorHandler = (err, req, res) => {
 };
 
 router.get("/", getBalans);
+router.put("/", updateBalans);
+router.delete("/", deleteBalans);
+
 
 router.put("/:id", async (req, res) => {
   try {
@@ -25,6 +28,7 @@ router.put("/:id", async (req, res) => {
     errorHandler(err, req, res);
   }
 });
+
 
 router.get("/:id", async (req, res) => {
   try {
