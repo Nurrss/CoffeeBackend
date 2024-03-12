@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const Balans = require("../models/Balans");
+const { getBalans } = require("../controller/balansController");
 
 const errorHandler = (err, req, res) => {
   console.error(err);
   res.status(500).json({ error: "Internal Server Error" });
 };
+
+router.get("/", getBalans);
 
 router.put("/:id", async (req, res) => {
   try {
@@ -18,15 +21,6 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json({ error: "Balanse not found" });
     }
     res.status(200).json({ data: updatedBalans });
-  } catch (err) {
-    errorHandler(err, req, res);
-  }
-});
-
-router.get("/", async (req, res) => {
-  try {
-    const balans = await Balans.find();
-    res.json({ data: balans });
   } catch (err) {
     errorHandler(err, req, res);
   }
