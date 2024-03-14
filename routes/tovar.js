@@ -1,10 +1,20 @@
-const router = require("express").Router();
 const Tovar = require("../models/Tovar");
+const router = require("express").Router();
+const {
+  getAllOrders,
+  getOrderById,
+  deleteOrderById,
+} = require("../controllers/orderController");
+
 
 const errorHandler = (err, req, res) => {
   console.error(err);
   res.status(500).json({ error: "Internal Server Error" });
 };
+
+router.get("/", getAllOrders);
+router.get("/:id", getOrderById);
+router.delete("/:id", deleteOrderById);
 
 //done
 router.post("/add", async (req, res) => {
