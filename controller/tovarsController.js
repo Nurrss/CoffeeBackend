@@ -36,8 +36,4 @@ const deleteOrderById = async (req, res) => {
   }
 };
 
-module.exports = 
-{ getAllOrders, 
-  getOrderById, 
-  deleteOrderById 
-};
+module.exports = { getAllOrders, getOrderById, deleteOrderById };
