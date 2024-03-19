@@ -4,6 +4,7 @@ const {
   getAllOrders,
   getOrderById,
   deleteOrderById,
+  addOrder,
 } = require("../controller/ordersController");
 
 const errorHandler = (err, req, res) => {
@@ -14,6 +15,7 @@ const errorHandler = (err, req, res) => {
 router.get("/", getAllOrders);
 router.get("/:id", getOrderById);
 router.delete("/:id", deleteOrderById);
+router.post("/add", addOrder);
 
 // router.post("/", async (req, res) => {
 //   try {

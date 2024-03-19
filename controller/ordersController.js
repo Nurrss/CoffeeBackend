@@ -16,10 +16,10 @@ const addOrder = async (req, res) => {
     const newOrder = new Order({ summa });
     await newOrder.save();
     res.status(200).json(newOrder);
-    if (!updatedBalance) {
-      return res.status(404).json({ error: "Balance not found" });
+    if (!newOrder) {
+      return res.status(404).json({ error: "Order not found" });
     }
-    res.status(200).json({ data: updatedBalance });
+    res.status(200).json({ data: newOrder });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -52,4 +52,4 @@ const deleteOrderById = async (req, res) => {
   }
 };
 
-module.exports = { getAllOrders, getOrderById, deleteOrderById };
+module.exports = { getAllOrders, getOrderById, deleteOrderById, addOrder };

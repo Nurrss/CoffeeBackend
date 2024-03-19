@@ -4,6 +4,7 @@ const {
   getBalance,
   updateBalance,
   deleteBalance,
+  addBalance,
 } = require("../controller/balanceController");
 
 const errorHandler = (err, req, res) => {
@@ -14,6 +15,7 @@ const errorHandler = (err, req, res) => {
 router.get("/", getBalance);
 router.put("/", updateBalance);
 router.delete("/", deleteBalance);
+router.post("/add", addBalance);
 
 // router.put("/:id", async (req, res) => {
 //   try {

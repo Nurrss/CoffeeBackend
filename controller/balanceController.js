@@ -40,8 +40,25 @@ const deleteBalance = async (req, res) => {
   }
 };
 
+const addBalance = async (req, res) => {
+  try {
+    const { aksha } = req.body;
+    const newOrder = new Balance({ aksha });
+    await newOrder.save();
+    res.status(200).json(newOrder);
+    if (!newOrder) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+    res.status(200).json({ data: newOrder });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   getBalance,
   updateBalance,
   deleteBalance,
+  addBalance,
 };
