@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Balance = require("../models/Balance");
 
 const getAllOrders = async (req, res) => {
   try {
@@ -13,13 +14,21 @@ const getAllOrders = async (req, res) => {
 const addOrder = async (req, res) => {
   try {
     const { summa } = req.body;
+    const id = "65f9ab9d979f7664008a5ed7";
+    const balance = await Balance.findById(id);
+    console.log(balance);
     const newOrder = new Order({ summa });
-    await newOrder.save();
-    res.status(200).json(newOrder);
-    if (!newOrder) {
-      return res.status(404).json({ error: "Order not found" });
+    if (Number(balance.aksha) > Number(summa)) {
+      const aksha = Number(balance.aksha) - Number(summa);
+      const updatedBalance = await Balance.findByIdAndUpdate(
+        id,
+        { aksha },
+        { new: true }
+      );
+      console.log(`New order was accepted ${updatedBalance}`);
+      await newOrder.save();
+      res.status(200).json(newOrder);
     }
-    res.status(200).json({ data: newOrder });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

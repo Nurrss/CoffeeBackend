@@ -13,7 +13,7 @@ const errorHandler = (err, req, res) => {
 };
 
 router.get("/", getBalance);
-router.put("/", updateBalance);
+router.put("/:id", updateBalance);
 router.delete("/", deleteBalance);
 router.post("/add", addBalance);
 
