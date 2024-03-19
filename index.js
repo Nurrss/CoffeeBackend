@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const balanceRoute = require("./routes/balance");
+const balansRoute = require("./routes/balance");
 const ordersRoute = require("./routes/order");
 const tovarsRoute = require("./routes/tovar");
 
@@ -34,7 +34,7 @@ mongoose.connection.on("error", (err) => {
   );
 });
 
-app.use("/balance", balanceRoute);
+app.use("/balans", balansRoute);
 app.use("/order", ordersRoute);
 app.use("/tovar", tovarsRoute);
 
