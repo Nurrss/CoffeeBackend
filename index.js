@@ -5,8 +5,29 @@ const morgan = require("morgan");
 const balansRoute = require("./routes/balance");
 const ordersRoute = require("./routes/order");
 const tovarsRoute = require("./routes/tovar");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
 const port = 8000;
+
+const option = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Node JS Coffee Backend Documentation",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        api: "http://localhost:8000/",
+      },
+    ],
+  },
+  apis: ["routes/*.js"],
+};
+
+const swaggerSpec = swaggerJSDoc(option);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(express.json());
 app.use(morgan("common"));
