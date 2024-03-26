@@ -1,5 +1,10 @@
-const router = require("express").Router();
 const Tovar = require("../models/Tovar");
+const router = require("express").Router();
+// const {
+//   getAllOrders,
+//   getOrderById,
+//   deleteOrderById,
+// } = require("../controllers/orderController");
 
 const errorHandler = (err, req, res) => {
   console.error(err);

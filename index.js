@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const balansRoute = require("./routes/balance");
+const balanceRoute = require("./routes/balance");
 const ordersRoute = require("./routes/order");
 const tovarsRoute = require("./routes/tovar");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const port = 8000;
 
@@ -35,6 +37,11 @@ app.use(morgan("common"));
 const DB_URL =
   "mongodb+srv://nurrsserkul:1234@cluster0.cvoja0a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
+const corsConfig = {
+  origin: "http://127.0.0.1:5500", // Update the origin to match your frontend URL
+  credentials: true, // To allow cookies and sessions
+};
+
 mongoose
   .connect(DB_URL)
   .then(() => console.log("Database connected!"))
@@ -55,7 +62,11 @@ mongoose.connection.on("error", (err) => {
   );
 });
 
-app.use("/balans", balansRoute);
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+app.use(cookieParser());
+
+app.use("/balance", balanceRoute);
 app.use("/order", ordersRoute);
 app.use("/tovar", tovarsRoute);
 
