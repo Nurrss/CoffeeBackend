@@ -176,6 +176,37 @@ router.get("/:id", getOrderById);
 // });
 router.delete("/:id", deleteOrderById);
 
+/**
+ * @swagger
+ * /order/delete/{id}:
+ *   delete:
+ *     summary: Delete item by ID
+ *     description: Endpoint to delete an item by its ID.
+ *     tags: [Order]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the item to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Item deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message
+ *       '404':
+ *         description: Order not found
+ *       '500':
+ *         description: Internal server error.
+ */
+
 // // router.put("/:id", async (req, res) => {
 // //   try {
 // //     const { summa } = req.body;
